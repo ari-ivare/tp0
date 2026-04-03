@@ -43,6 +43,13 @@ int main(void)
 	// Creamos una conexión hacia el servidor
 	conexion = crear_conexion(ip, puerto);
 
+	if (handshake(conexion) ==  0) {
+		log_info(logger, "Handshake OK");
+	} else {
+		log_error(logger, "Handshake ERROR");
+		abort();
+	}
+
 	// Enviamos al servidor el valor de CLAVE como mensaje
 
 	// Armamos y enviamos el paquete

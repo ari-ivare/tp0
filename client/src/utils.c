@@ -111,3 +111,15 @@ void liberar_conexion(int socket_cliente)
 {
 	close(socket_cliente);
 }
+
+int handshake(int conexion) {
+	size_t bytes;
+
+	int32_t handshake = 1;
+	int32_t result;
+
+	bytes = send(conexion, &handshake, sizeof(int32_t), 0);
+	bytes = recv(conexion, &result, sizeof(int32_t), MSG_WAITALL);
+
+	return result;
+}

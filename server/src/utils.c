@@ -111,3 +111,19 @@ t_list* recibir_paquete(int socket_cliente)
 	free(buffer);
 	return valores;
 }
+
+void handshake(int conexion)
+{
+	size_t bytes;
+
+	int32_t handshake;
+	int32_t resultOk = 0;
+	int32_t resultError = -1;
+
+	bytes = recv(conexion, &handshake, sizeof(int32_t), MSG_WAITALL);
+	if (handshake == 1) {
+		bytes = send(conexion, &resultOk, sizeof(int32_t), 0);
+	} else {
+		bytes = send(conexion, &resultError, sizeof(int32_t), 0);
+	}
+}
