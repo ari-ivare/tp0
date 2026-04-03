@@ -32,12 +32,6 @@ int main(void)
 	log_info(logger, puerto);
 
 
-	// Usando el config creado previamente, leemos los valores del config y los 
-	// dejamos en las variables 'ip', 'puerto' y 'valor'
-
-	// Loggeamos el valor de config
-
-
 	/* ---------------- LEER DE CONSOLA ---------------- */
 
 	leer_consola(logger);
@@ -78,13 +72,16 @@ void leer_consola(t_log* logger)
 {
 	char* leido;
 
-	// La primera te la dejo de yapa
 	leido = readline("> ");
 
 	// El resto, las vamos leyendo y logueando hasta recibir un string vacío
+	while(leido[0] != '\0'){
+		log_info(logger, leido);
+		free(leido);
+		leido = readline("> ");
+	}
 
-
-	// ¡No te olvides de liberar las lineas antes de regresar!
+	free(leido);
 
 }
 
